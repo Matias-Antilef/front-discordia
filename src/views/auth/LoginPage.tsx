@@ -5,11 +5,12 @@ import AuthForm from "./components/auth-form";
 import { PrivateRoutes, PublicRoutes } from "@/models/routes";
 import TextField from "@/components/ui/text-field";
 import { useNavigate } from "react-router";
-import { useUserContext } from "@/context/UserProvider";
+import { useUser } from "@/context/hooks/useUser";
+import { create } from "domain";
 
 function LoginPage() {
+  const { createUser } = useUser();
   const navigate = useNavigate();
-  const { createUser } = useUserContext();
   const {
     register,
     handleSubmit,
@@ -24,8 +25,10 @@ function LoginPage() {
 
     if (response.status === 200) {
       createUser({
+        username: response.data.username,
         status: "online",
-        username: data.email,
+        friends: [],
+        servers: [],
       });
       navigate(PrivateRoutes.DISCORDIA);
     }

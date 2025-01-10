@@ -1,10 +1,11 @@
 import { Navigate, Route, Routes } from "react-router";
-import ChatMain from "./chat/ChatMain";
 import { PrivateRoutes } from "@/models/routes";
 import LayoutComponent from "@/components/layout";
 import HomePage from "./home/HomePage";
 import { useEffect } from "react";
 import { io } from "socket.io-client";
+import ChatFriend from "./chat/ChatFriend";
+import ChatServer from "./chat/ChatServer";
 
 function Discordia() {
   useEffect(() => {
@@ -17,23 +18,33 @@ function Discordia() {
       console.log("Connected to server");
     });
 
+    socket.on("recievedMessage", (message) => {
+      console.log("Recieved message", message);
+    });
+
     return () => {
-      socket.on("disconnect", () => {});
+      socket.on("disconnect", () => {
+        console.log("Disconnected from server");
+      });
     };
   }, []);
-  console.log("Discordia");
   return (
-    <Routes>
-      <Route path="/" element={<Navigate to={PrivateRoutes.HOME} />} />
-      <Route
-        path={PrivateRoutes.HOME}
-        element={<LayoutComponent children={<HomePage />} />}
-      />
-      <Route
-        path={`${PrivateRoutes.CHAT}/:id`}
-        element={<LayoutComponent children={<ChatMain />} />}
-      />
-    </Routes>
+    <>
+      <LayoutComponent>
+        <Routes>
+          <Route path="/" element={<Navigate to={PrivateRoutes.HOME} />} />
+          <Route path={PrivateRoutes.HOME} element={<HomePage />} />
+          <Route
+            path={`${PrivateRoutes.CHAT_FRIEND}/:id`}
+            element={<ChatFriend />}
+          />
+          <Route
+            path={`${PrivateRoutes.CHAT_SERVER}/:id`}
+            element={<ChatServer />}
+          />
+        </Routes>
+      </LayoutComponent>
+    </>
   );
 }
 export default Discordia;

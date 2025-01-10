@@ -1,4 +1,4 @@
-import ChatHeader from "@/components/chat/ChatHeader";
+import ChatHeader from "@/views/discordia/chat/components/ChatHeader";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -7,12 +7,12 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { io } from "socket.io-client";
 
-function ChatMain() {
+function ChatServer() {
   const { id } = useParams();
 
   const [messages, setMessages] = useState<{ content: string }[]>([]);
   const [message, setMessage] = useState("");
-  const socket = io(import.meta.env.NEXT_PUBLIC_SOCKET_PORT, {
+  const socket = io(import.meta.env.VITE_PUBLIC_SOCKET_PORT, {
     path: "/socket/",
     withCredentials: true,
   });
@@ -42,14 +42,16 @@ function ChatMain() {
   return (
     <Card className="flex-1 flex flex-col">
       <CardHeader>
-        <ChatHeader name="Matias" key={1} />
+        <ChatHeader
+          name={id ? id.toString() : "SERVER DEFAULT"}
+          type="server"
+          key={1}
+        />
       </CardHeader>
       <CardContent className=" bg-neutral-700 h-full text-slate-200 flex flex-col relative justify-between ">
         <ScrollArea className="h-[85%] ">
           {messages.map((message, index) => (
-            <h1 key={index}>
-              {message.content} {id}
-            </h1>
+            <h1 key={index}>{message.content}</h1>
           ))}
         </ScrollArea>
 
@@ -69,4 +71,4 @@ function ChatMain() {
     </Card>
   );
 }
-export default ChatMain;
+export default ChatServer;

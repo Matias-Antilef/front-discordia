@@ -1,10 +1,12 @@
+import { useUser } from "@/context/hooks/useUser";
 import { PublicRoutes } from "@/models/routes";
 import { Navigate, Outlet } from "react-router";
 
 function AuthGuard() {
-  const status = localStorage.getItem("status");
+  const { getUser } = useUser();
+  const user = getUser();
 
-  if (status !== "online") return <Navigate to={PublicRoutes.LOGIN} />;
+  if (user.status !== "online") return <Navigate to={PublicRoutes.LOGIN} />;
 
   return <Outlet />;
 }

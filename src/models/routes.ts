@@ -5,5 +5,7 @@ export enum PublicRoutes {
 export enum PrivateRoutes {
   DISCORDIA = "/discordia",
   HOME = "home",
-  CHAT = "chat",
+  CHAT_SERVER = "chat_server",
+  CHAT_FRIEND = "chat_friend",
+  SERVER = "server",
 }

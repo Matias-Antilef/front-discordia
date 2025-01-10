@@ -3,10 +3,10 @@ import { PrivateRoutes } from "@/models/routes";
 import { Link } from "react-router";
 import { X } from "lucide-react";
 
-function FriendContet({ id }: { id: string }) {
+function FriendItem({ id }: { id: string }) {
   return (
     <Link
-      to={`${PrivateRoutes.DISCORDIA}/${PrivateRoutes.CHAT}/${id}`}
+      to={`${PrivateRoutes.DISCORDIA}/${PrivateRoutes.CHAT_FRIEND}/${id}`}
       className="flex hover:cursor-pointer items-center mb-1  h-16 gap-2 bg-neutral-700 group hover:bg-neutral-600 rounded-lg px-1"
     >
       <AvatarCustom id="1" status="online" />
@@ -15,4 +15,4 @@ function FriendContet({ id }: { id: string }) {
     </Link>
   );
 }
-export default FriendContet;
+export default FriendItem;
