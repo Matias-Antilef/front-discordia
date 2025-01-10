@@ -48,7 +48,7 @@ export function AddFriend() {
             id="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className=" border-none bg-neutral-800 py-5 placeholder:text-neutral-400"
+            className=" border-none bg-neutral-700 py-5 placeholder:text-neutral-300 text-neutral-200"
             placeholder="Nombre de usuario"
           />
         </div>

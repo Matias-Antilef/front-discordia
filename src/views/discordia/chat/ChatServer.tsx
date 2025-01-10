@@ -10,50 +10,7 @@ import { socket } from "@/utils/socket";
 function ChatServer() {
   const { id } = useParams();
 
-  const [messages, setMessages] = useState<{ content: string }[]>([
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-  ]);
+  const [messages, setMessages] = useState<{ content: string }[]>([]);
   const [message, setMessage] = useState("");
 
   useEffect(() => {

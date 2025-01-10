@@ -1,5 +1,4 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 function ChatHeader({
   name,
@@ -15,7 +14,7 @@ function ChatHeader({
           src="/avatar.jpg"
           className="w-full h-full rounded-full p-1"
         />
-        <AvatarFallback> {name} </AvatarFallback>
+        <AvatarFallback> {name.slice(0, 2).toUpperCase()} </AvatarFallback>
         {type === "friend" && (
           <span className="absolute h-4 w-4 rounded-full bg-green-500 right-0 bottom-0" />
         )}

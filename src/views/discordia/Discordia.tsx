@@ -6,8 +6,19 @@ import { useEffect } from "react";
 import ChatFriend from "./chat/ChatFriend";
 import ChatServer from "./chat/ChatServer";
 import { socket } from "@/utils/socket";
+import { useUser } from "@/context/hooks/useUser";
 
 function Discordia() {
+  const { getServers, getFriends } = useUser();
+  const serversId = getServers().map((server) => server.name);
+  // const friendsId = getFriends().map((friend) => friend.username);
+
+  useEffect(() => {
+    if (serversId.length > 0) {
+      socket.emit("joinChannel", serversId);
+    }
+  }, [serversId]);
+
   useEffect(() => {
     socket.on("connect", () => {
       console.log("Connected to server");
@@ -15,6 +26,10 @@ function Discordia() {
 
     socket.on("recievedMessage", (message) => {
       console.log("Recieved message", message);
+    });
+
+    socket.on("receiveMessageToSpecificUser", (user, message) => {
+      console.log("Recieved message", message, user);
     });
 
     return () => {

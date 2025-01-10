@@ -17,7 +17,7 @@ function AvatarCustom({
         src="/avatar.jpg"
         className="w-full h-full rounded-full p-1"
       />
-      <AvatarFallback> {id} </AvatarFallback>
+      <AvatarFallback> {id.slice(0, 2)} </AvatarFallback>
       <span
         className={`${
           status == "online" ? online : status == "offline" ? offline : sleeping

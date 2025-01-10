@@ -27,11 +27,8 @@ export function CreateServer() {
       alert("El servidor ya existe");
       return;
     }
+    createServer({ name, description, messages: [] });
 
-    createServer({ name, description });
-    if (name) {
-      socket.emit("joinChannel", name);
-    }
     socket.on("welcomeMessage", (message) => {
       console.log(message);
     });
@@ -53,14 +50,14 @@ export function CreateServer() {
             id="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className=" border-none bg-neutral-800 py-5 placeholder:text-neutral-400"
+            className=" border-none bg-neutral-700 py-5 placeholder:text-neutral-300 text-neutral-200"
             placeholder="Nombre del servidor"
           />
           <Input
             id="description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="  border-none bg-neutral-800 py-5 placeholder:text-neutral-400"
+            className="  border-none bg-neutral-700 py-5 placeholder:text-neutral-300 text-neutral-200"
             placeholder="Descripción del servidor"
           />
         </div>

@@ -24,7 +24,7 @@ function ServerNav() {
         <ScrollArea className="h-[80vh] ">
           {servers &&
             servers.map(({ name }: ServerModel) => (
-              <ServerItem key={name} fallback={name} id={name} />
+              <ServerItem key={name} id={name} />
             ))}
         </ScrollArea>
       </CardContent>

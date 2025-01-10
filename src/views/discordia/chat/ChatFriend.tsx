@@ -5,53 +5,13 @@ import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useState } from "react";
 import { useParams } from "react-router";
+import { socket } from "@/utils/socket";
 
 function ChatFriend() {
   const { id } = useParams();
 
   const [messages, setMessages] = useState<{ content: string }[]>([
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
-    { content: "hello" },
+    { content: "friend" },
   ]);
   const [message, setMessage] = useState("");
 
@@ -59,6 +19,8 @@ function ChatFriend() {
     e.preventDefault();
     if (!message) return;
 
+    socket.emit("sendMessageToSpecificUser", id, message);
+    socket.emit("sendMessageToChannel", id, message);
     setMessage("");
   };
 
