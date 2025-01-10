@@ -12,8 +12,7 @@ export const useUser = () => {
   };
 
   const getUser = () => {
-    const user = useSelector((state: RootState) => state.user.user);
-    return user;
+    return useSelector((state: RootState) => state.user.user);
   };
 
   const logout = () => {
@@ -27,8 +26,7 @@ export const useUser = () => {
   };
 
   const getServers = () => {
-    const servers = useSelector((state: RootState) => state.user.user.servers);
-    return servers;
+    return useSelector((state: RootState) => state.user.user.servers);
   };
 
   return { createUser, getUser, logout, createServer, getServers };

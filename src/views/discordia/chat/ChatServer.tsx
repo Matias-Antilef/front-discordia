@@ -1,16 +1,11 @@
 import ChatHeader from "@/views/discordia/chat/components/ChatHeader";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { io } from "socket.io-client";
+import { socket } from "@/utils/socket";
 
 function ChatServer() {
   const { id } = useParams();
@@ -61,15 +56,7 @@ function ChatServer() {
   ]);
   const [message, setMessage] = useState("");
 
-  const socket = io(import.meta.env.VITE_PUBLIC_SOCKET_PORT, {
-    path: "/socket/",
-    withCredentials: true,
-  });
-
   useEffect(() => {
-    if (id) {
-      socket.emit("joinChannel", id);
-    }
     socket.on("channelMessage", (data) => {
       setMessages((prev) => [...prev, { content: data.message }]);
     });
@@ -82,6 +69,7 @@ function ChatServer() {
   const handleNewMessage = (e: React.FormEvent) => {
     e.preventDefault();
     if (!message) return;
+
     socket.emit("sendMessageToChannel", id, message);
     setMessage("");
   };

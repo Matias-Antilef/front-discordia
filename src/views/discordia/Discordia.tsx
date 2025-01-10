@@ -3,17 +3,12 @@ import { PrivateRoutes } from "@/models/routes";
 import LayoutComponent from "@/components/layout";
 import HomePage from "./home/HomePage";
 import { useEffect } from "react";
-import { io } from "socket.io-client";
 import ChatFriend from "./chat/ChatFriend";
 import ChatServer from "./chat/ChatServer";
+import { socket } from "@/utils/socket";
 
 function Discordia() {
   useEffect(() => {
-    const socket = io(import.meta.env.VITE_PUBLIC_SOCKET_PORT, {
-      path: "/socket/",
-      withCredentials: true,
-    });
-
     socket.on("connect", () => {
       console.log("Connected to server");
     });
