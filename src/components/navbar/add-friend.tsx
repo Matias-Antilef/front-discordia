@@ -10,43 +10,38 @@ import {
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { useUser } from "@/context/hooks/useUser";
-import { PlusCircle } from "lucide-react";
+import { UserPlusIcon } from "lucide-react";
 import { socket } from "@/utils/socket";
 
-export function CreateServer() {
-  const { createServer, getServers } = useUser();
-  const servers = getServers();
+export function AddFriend() {
+  const { addFriend, getFriends } = useUser();
+  const friends = getFriends();
   const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
   const [open, setOpen] = useState(false);
 
   const handleSubmit = () => {
-    if (!name) return alert("El nombre es requerido");
+    if (!name) return alert("El username es requerido");
 
-    if (servers.map((server) => server.name).includes(name)) {
-      alert("El servidor ya existe");
+    if (friends.map((friend) => friend.username).includes(name)) {
+      alert("Ya tienes a este usuario en tu lista");
       return;
     }
-
-    createServer({ name, description });
-    if (name) {
-      socket.emit("joinChannel", name);
-    }
-    socket.on("welcomeMessage", (message) => {
-      console.log(message);
+    socket.on("receiveMessageToSpecificUser", (data) => {
+      console.log(data);
     });
-
+    addFriend({ username: name });
+    setName("");
     setOpen(false);
   };
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <PlusCircle className="p-0 h-full w-full hover:cursor-pointer stroke-white " />
+        <UserPlusIcon className="hover:bg-neutral-600 rounded-full transition-colors  p-1 h-12 w-12 hover:cursor-pointer stroke-white " />
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] bg-neutral-900 flex flex-col gap-10  text-neutral-500 border-none">
         <DialogHeader>
-          <DialogTitle className="text-white">Unirse a un servidor</DialogTitle>
+          <DialogTitle className="text-white">Agregar amigo</DialogTitle>
         </DialogHeader>
         <div className="flex flex-col gap-5">
           <Input
@@ -54,14 +49,7 @@ export function CreateServer() {
             value={name}
             onChange={(e) => setName(e.target.value)}
             className=" border-none bg-neutral-800 py-5 placeholder:text-neutral-400"
-            placeholder="Nombre del servidor"
-          />
-          <Input
-            id="description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            className="  border-none bg-neutral-800 py-5 placeholder:text-neutral-400"
-            placeholder="Descripción del servidor"
+            placeholder="Nombre de usuario"
           />
         </div>
         <DialogFooter>
@@ -71,7 +59,7 @@ export function CreateServer() {
             className=" text-black"
             onClick={handleSubmit}
           >
-            Unirse
+            Agregar
           </Button>
         </DialogFooter>
       </DialogContent>

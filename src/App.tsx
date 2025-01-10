@@ -4,11 +4,14 @@ import RegisterPage from "./views/auth/RegisterPage";
 import LoginPage from "./views/auth/LoginPage";
 import AuthGuard from "./utils/AuthGuard";
 import PageNotFound from "./utils/PageNotFound";
-import Discordia from "./views/discordia/Discordia";
+import { lazy, Suspense } from "react";
+import SuspenseFallback from "./utils/SuspenseFallback";
 
 function App() {
+  const Discordia = lazy(() => import("./views/discordia/Discordia"));
+
   return (
-    <>
+    <Suspense fallback={<SuspenseFallback />}>
       <Routes>
         <Route path={"*"} element={<PageNotFound />} />
         <Route path={"/"} element={<Navigate to={PublicRoutes.LOGIN} />} />
@@ -21,7 +24,7 @@ function App() {
           />
         </Route>
       </Routes>
-    </>
+    </Suspense>
   );
 }
 export default App;

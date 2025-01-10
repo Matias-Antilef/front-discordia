@@ -3,11 +3,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router";
-import { socket } from "@/utils/socket";
 
-function ChatServer() {
+function ChatFriend() {
   const { id } = useParams();
 
   const [messages, setMessages] = useState<{ content: string }[]>([
@@ -56,34 +55,17 @@ function ChatServer() {
   ]);
   const [message, setMessage] = useState("");
 
-  useEffect(() => {
-    if (id) {
-      socket.emit("joinChannel", id);
-    }
-    socket.on("channelMessage", (data) => {
-      setMessages((prev) => [...prev, { content: data.message }]);
-    });
-
-    socket.on("welcomeMessage", (message) => {
-      console.log(message);
-    });
-
-    return () => {
-      socket.off("channelMessage");
-    };
-  }, [id]);
-
   const handleNewMessage = (e: React.FormEvent) => {
     e.preventDefault();
     if (!message) return;
-    socket.emit("sendMessageToChannel", id, message);
+
     setMessage("");
   };
 
   return (
     <Card className="h-full flex flex-col bg-neutral-700 text-neutral-200 ">
       <ChatHeader
-        name={id ? id.toString() : "SERVER DEFAULT"}
+        name={id ? id.toString() : "UNDEFINED"}
         type="server"
         key={1}
       />
@@ -114,4 +96,4 @@ function ChatServer() {
     </Card>
   );
 }
-export default ChatServer;
+export default ChatFriend;

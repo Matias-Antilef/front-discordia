@@ -2,10 +2,14 @@ export interface UserModel {
   username: string;
   status: string;
   servers: ServerModel[];
-  friends: string[];
+  friends: FriendModel[];
 }
 
 export interface ServerModel {
   name: string;
   description?: string;
+}
+
+export interface FriendModel {
+  username: string;
 }
