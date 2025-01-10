@@ -1,4 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 function ChatHeader({
   name,
@@ -8,7 +9,7 @@ function ChatHeader({
   type: "server" | "friend";
 }) {
   return (
-    <div className="bg-neutral-700 border-b-[2px] border-neutral-800 py-2 px-5 gap-5 flex items-center text-white">
+    <div className="flex items-center gap-5 px-5 py-3 relative border-b-2 border-neutral-800">
       <Avatar className="h-12 w-12 relative overflow-visible">
         <AvatarImage
           src="/avatar.jpg"

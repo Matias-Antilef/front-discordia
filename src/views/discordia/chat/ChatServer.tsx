@@ -1,6 +1,11 @@
 import ChatHeader from "@/views/discordia/chat/components/ChatHeader";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useEffect, useState } from "react";
@@ -10,8 +15,52 @@ import { io } from "socket.io-client";
 function ChatServer() {
   const { id } = useParams();
 
-  const [messages, setMessages] = useState<{ content: string }[]>([]);
+  const [messages, setMessages] = useState<{ content: string }[]>([
+    { content: "hello" },
+    { content: "hello" },
+    { content: "hello" },
+    { content: "hello" },
+    { content: "hello" },
+    { content: "hello" },
+    { content: "hello" },
+    { content: "hello" },
+    { content: "hello" },
+    { content: "hello" },
+    { content: "hello" },
+    { content: "hello" },
+    { content: "hello" },
+    { content: "hello" },
+    { content: "hello" },
+    { content: "hello" },
+    { content: "hello" },
+    { content: "hello" },
+    { content: "hello" },
+    { content: "hello" },
+    { content: "hello" },
+    { content: "hello" },
+    { content: "hello" },
+    { content: "hello" },
+    { content: "hello" },
+    { content: "hello" },
+    { content: "hello" },
+    { content: "hello" },
+    { content: "hello" },
+    { content: "hello" },
+    { content: "hello" },
+    { content: "hello" },
+    { content: "hello" },
+    { content: "hello" },
+    { content: "hello" },
+    { content: "hello" },
+    { content: "hello" },
+    { content: "hello" },
+    { content: "hello" },
+    { content: "hello" },
+    { content: "hello" },
+    { content: "hello" },
+  ]);
   const [message, setMessage] = useState("");
+
   const socket = io(import.meta.env.VITE_PUBLIC_SOCKET_PORT, {
     path: "/socket/",
     withCredentials: true,
@@ -33,35 +82,35 @@ function ChatServer() {
   const handleNewMessage = (e: React.FormEvent) => {
     e.preventDefault();
     if (!message) return;
-
-    setMessages((prev) => [...prev, { content: message }]);
     socket.emit("sendMessageToChannel", id, message);
-
     setMessage("");
   };
-  return (
-    <Card className="flex-1 flex flex-col">
-      <CardHeader>
-        <ChatHeader
-          name={id ? id.toString() : "SERVER DEFAULT"}
-          type="server"
-          key={1}
-        />
-      </CardHeader>
-      <CardContent className=" bg-neutral-700 h-full text-slate-200 flex flex-col relative justify-between ">
-        <ScrollArea className="h-[85%] ">
-          {messages.map((message, index) => (
-            <h1 key={index}>{message.content}</h1>
-          ))}
-        </ScrollArea>
 
-        <div className="flex h-[15%] items-start pt-2 ">
+  return (
+    <Card className="h-full flex flex-col bg-neutral-700 text-neutral-200 ">
+      <ChatHeader
+        name={id ? id.toString() : "SERVER DEFAULT"}
+        type="server"
+        key={1}
+      />
+      <CardContent className=" h-[90vh] relative flex flex-col">
+        <ScrollArea className=" flex-1 ">
+          <div className="flex flex-col gap-1 ">
+            {messages.map((message, index) => (
+              <p className="py-1" key={index}>
+                {message.content}
+              </p>
+            ))}
+          </div>
+        </ScrollArea>
+        <div className="flex relative space-x-5 py-5 items-center ">
           <Input
             onKeyDown={(e) => e.key === "Enter" && handleNewMessage(e)}
             type="text"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            className="text-white outline-none"
+            className="text-white border-none bg-neutral-600 placeholder:text-neutral-400"
+            placeholder="Enviar mensaje"
           />
           <Button onClick={handleNewMessage} className="w-32">
             Send

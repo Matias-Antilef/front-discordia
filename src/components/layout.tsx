@@ -6,7 +6,7 @@ function LayoutComponent({ children }: { children: React.ReactNode }) {
     <div className="h-screen w-screen  overflow-hidden flex">
       <ServerNav />
       <PrimaryNav />
-      {children}
+      <div className="flex-1 h-screen ">{children}</div>
     </div>
   );
 }

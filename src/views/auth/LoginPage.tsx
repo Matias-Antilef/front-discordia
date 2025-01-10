@@ -6,7 +6,6 @@ import { PrivateRoutes, PublicRoutes } from "@/models/routes";
 import TextField from "@/components/ui/text-field";
 import { useNavigate } from "react-router";
 import { useUser } from "@/context/hooks/useUser";
-import { create } from "domain";
 
 function LoginPage() {
   const { createUser } = useUser();
