@@ -1,7 +1,11 @@
+import { useUser } from "@/context/hooks/useUser";
+
 function HomePage() {
+  const { getUser } = useUser();
+  const user = getUser().username;
   return (
     <div className="bg-neutral-700 h-full text-white flex-1 items-center justify-center flex">
-      <h1>me</h1>
+      <h1 className="text-3xl text-black font-bold">{user}</h1>
     </div>
   );
 }

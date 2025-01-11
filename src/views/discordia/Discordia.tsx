@@ -9,9 +9,8 @@ import { socket } from "@/utils/socket";
 import { useUser } from "@/context/hooks/useUser";
 
 function Discordia() {
-  const { getServers, getFriends } = useUser();
+  const { getServers, logout } = useUser();
   const serversId = getServers().map((server) => server.name);
-  // const friendsId = getFriends().map((friend) => friend.username);
 
   useEffect(() => {
     if (serversId.length > 0) {
@@ -22,14 +21,6 @@ function Discordia() {
   useEffect(() => {
     socket.on("connect", () => {
       console.log("Connected to server");
-    });
-
-    socket.on("recievedMessage", (message) => {
-      console.log("Recieved message", message);
-    });
-
-    socket.on("receiveMessageToSpecificUser", (user, message) => {
-      console.log("Recieved message", message, user);
     });
 
     return () => {

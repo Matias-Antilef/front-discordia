@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { socket } from "@/utils/socket";
 
@@ -15,12 +15,24 @@ function ChatFriend() {
   ]);
   const [message, setMessage] = useState("");
 
+  useEffect(() => {
+    socket.on("receiveMessageToSpecificUser", (data) => {
+      setMessages((prev) => [...prev, { content: data.message[0] }]);
+    });
+    return () => {
+      socket.off("receiveMessageToSpecificUser");
+
+      setMessages([]);
+    };
+  }, [id]);
+
   const handleNewMessage = (e: React.FormEvent) => {
     e.preventDefault();
     if (!message) return;
 
     socket.emit("sendMessageToSpecificUser", id, message);
-    socket.emit("sendMessageToChannel", id, message);
+    setMessages((prev) => [...prev, { content: message }]);
+
     setMessage("");
   };
 

@@ -11,7 +11,6 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { useUser } from "@/context/hooks/useUser";
 import { UserPlusIcon } from "lucide-react";
-import { socket } from "@/utils/socket";
 
 export function AddFriend() {
   const { addFriend, getFriends } = useUser();
@@ -26,9 +25,7 @@ export function AddFriend() {
       alert("Ya tienes a este usuario en tu lista");
       return;
     }
-    socket.on("receiveMessageToSpecificUser", (data) => {
-      console.log(data);
-    });
+
     addFriend({ username: name });
     setName("");
     setOpen(false);

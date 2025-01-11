@@ -6,9 +6,11 @@ import { BrowserRouter } from "react-router";
 import ReduxProvider from "./context/ReduxProvider.tsx";
 
 createRoot(document.getElementById("root")!).render(
-  <BrowserRouter>
-    <ReduxProvider>
-      <App />
-    </ReduxProvider>
-  </BrowserRouter>
+  <StrictMode>
+    <BrowserRouter>
+      <ReduxProvider>
+        <App />
+      </ReduxProvider>
+    </BrowserRouter>
+  </StrictMode>
 );

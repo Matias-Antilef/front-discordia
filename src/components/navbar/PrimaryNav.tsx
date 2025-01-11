@@ -3,9 +3,10 @@ import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
 import { ScrollArea } from "../ui/scroll-area";
 import FriendItem from "./FriendItem";
 import { AddFriend } from "./add-friend";
+import { Button } from "../ui/button";
 
 function PrimaryNav() {
-  const { getFriends } = useUser();
+  const { getFriends, logout } = useUser();
   const friends = getFriends();
   return (
     <Card className="bg-neutral-900 h-full w-80 relative">
@@ -18,8 +19,11 @@ function PrimaryNav() {
             ))}
         </ScrollArea>
       </CardContent>
-      <CardFooter className="flex items-center justify-center bottom-0 absolute w-full h-[10vh]  m-0">
+      <CardFooter className="flex items-center justify-between bottom-0 absolute w-full h-[10vh]  m-0">
         <AddFriend />
+        <Button onClick={() => logout()} variant={"destructive"}>
+          Logout
+        </Button>
       </CardFooter>
     </Card>
   );

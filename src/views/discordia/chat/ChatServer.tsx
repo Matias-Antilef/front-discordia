@@ -20,6 +20,7 @@ function ChatServer() {
 
     return () => {
       socket.off("channelMessage");
+      setMessages([]);
     };
   }, [id]);
 
@@ -28,6 +29,7 @@ function ChatServer() {
     if (!message) return;
 
     socket.emit("sendMessageToChannel", id, message);
+
     setMessage("");
   };
 

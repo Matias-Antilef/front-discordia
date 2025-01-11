@@ -27,7 +27,7 @@ export function CreateServer() {
       alert("El servidor ya existe");
       return;
     }
-    createServer({ name, description, messages: [] });
+    createServer({ name, description });
 
     socket.on("welcomeMessage", (message) => {
       console.log(message);
