@@ -5,7 +5,7 @@ function HomePage() {
   const user = getUser().username;
   return (
     <div className="bg-neutral-700 h-full text-white flex-1 items-center justify-center flex">
-      <h1 className="text-3xl text-black font-bold">{user}</h1>
+      <h1 className="text-3xl font-semibold">{user} </h1>
     </div>
   );
 }

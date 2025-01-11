@@ -14,7 +14,7 @@ function FriendItem({ id }: { id: string }) {
       <AvatarCustom id="1" status="online" />
       <h3 className="flex-1  text-white"> {id} </h3>
       <X
-        className="stroke-neutral-400 group-hover:stroke-white hover:stroke-red-500 transition-colors "
+        className="stroke-neutral-400 group-hover:stroke-white hover:bg-neutral-500  rounded-full transition-colors "
         onClick={() => removeFriend({ username: id })}
       />
     </Link>

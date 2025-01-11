@@ -10,12 +10,17 @@ import { socket } from "@/utils/socket";
 function ChatServer() {
   const { id } = useParams();
 
-  const [messages, setMessages] = useState<{ content: string }[]>([]);
+  const [messages, setMessages] = useState<
+    { fromUser: string; content: string }[]
+  >([]);
   const [message, setMessage] = useState("");
 
   useEffect(() => {
     socket.on("channelMessage", (data) => {
-      setMessages((prev) => [...prev, { content: data.message }]);
+      setMessages((prev) => [
+        ...prev,
+        { fromUser: data.fromUser, content: data.message },
+      ]);
     });
 
     return () => {
@@ -27,9 +32,7 @@ function ChatServer() {
   const handleNewMessage = (e: React.FormEvent) => {
     e.preventDefault();
     if (!message) return;
-
     socket.emit("sendMessageToChannel", id, message);
-
     setMessage("");
   };
 
@@ -42,13 +45,18 @@ function ChatServer() {
       />
       <CardContent className=" h-[90vh] relative flex flex-col">
         <ScrollArea className=" flex-1 ">
-          <div className="flex flex-col gap-1 ">
+          <ul className="flex flex-col gap-1 ">
             {messages.map((message, index) => (
-              <p className="py-1" key={index}>
-                {message.content}
-              </p>
+              <li className="py-1" key={index}>
+                <div className="space-y-1">
+                  <h4 className="font-medium text-neutral-300">
+                    {message.fromUser}
+                  </h4>
+                  <p className="text-neutral-100">{message.content}</p>
+                </div>
+              </li>
             ))}
-          </div>
+          </ul>
         </ScrollArea>
         <div className="flex relative space-x-5 py-5 items-center ">
           <Input

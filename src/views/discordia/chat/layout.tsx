@@ -1,5 +1,5 @@
-import PrimaryNav from "./navbar/PrimaryNav";
-import ServerNav from "./server/ServerNav";
+import PrimaryNav from "@/components/navbar/PrimaryNav";
+import ServerNav from "@/components/server/ServerNav";
 
 function LayoutComponent({ children }: { children: React.ReactNode }) {
   return (

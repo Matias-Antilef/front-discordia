@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -24,9 +25,9 @@ export function CreateServer() {
     if (!name) return alert("El nombre es requerido");
 
     if (servers.map((server) => server.name).includes(name)) {
-      alert("El servidor ya existe");
-      return;
+      return alert("El servidor ya existe");
     }
+
     createServer({ name, description });
 
     socket.on("welcomeMessage", (message) => {
@@ -39,35 +40,30 @@ export function CreateServer() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <PlusCircle className="p-0 h-full w-full hover:cursor-pointer stroke-white " />
+        <PlusCircle className=" hover:bg-neutral-600 rounded-full p-1 h-16 w-16 stroke-[.5px] hover:cursor-pointer stroke-white " />
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] bg-neutral-900 flex flex-col gap-10  text-neutral-500 border-none">
+      <DialogContent className="sm:max-w-[425px] bg-neutral-700 flex flex-col gap-10 border-none">
         <DialogHeader>
           <DialogTitle className="text-white">Unirse a un servidor</DialogTitle>
         </DialogHeader>
-        <div className="flex flex-col gap-5">
+        <DialogDescription className="flex flex-col gap-5">
           <Input
             id="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className=" border-none bg-neutral-700 py-5 placeholder:text-neutral-300 text-neutral-200"
+            className=" border-none bg-neutral-600 py-5 placeholder:text-neutral-300 text-neutral-200"
             placeholder="Nombre del servidor"
           />
           <Input
             id="description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="  border-none bg-neutral-700 py-5 placeholder:text-neutral-300 text-neutral-200"
+            className="  border-none bg-neutral-600 py-5 placeholder:text-neutral-300 text-neutral-200"
             placeholder="Descripción del servidor"
           />
-        </div>
+        </DialogDescription>
         <DialogFooter>
-          <Button
-            type="submit"
-            variant="outline"
-            className=" text-black"
-            onClick={handleSubmit}
-          >
+          <Button type="submit" variant="secondary" onClick={handleSubmit}>
             Unirse
           </Button>
         </DialogFooter>

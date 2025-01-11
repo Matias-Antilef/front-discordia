@@ -11,8 +11,8 @@ function ChatHeader({
     <div className="flex items-center gap-5 px-5 py-3 relative border-b-2 border-neutral-800">
       <Avatar className="h-12 w-12 relative overflow-visible">
         <AvatarImage
-          src="/avatar.jpg"
-          className="w-full h-full rounded-full p-1"
+          src={type === "server" ? "/server.jpg" : "/avatar.jpg"}
+          className="w-full bg-neutral-100 h-full rounded-full p-1 object-cover"
         />
         <AvatarFallback> {name.slice(0, 2).toUpperCase()} </AvatarFallback>
         {type === "friend" && (

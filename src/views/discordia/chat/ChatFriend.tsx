@@ -6,18 +6,24 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { socket } from "@/utils/socket";
+import { useUser } from "@/context/hooks/useUser";
 
 function ChatFriend() {
   const { id } = useParams();
+  const { getUser } = useUser();
+  const username = getUser().username;
 
-  const [messages, setMessages] = useState<{ content: string }[]>([
-    { content: "friend" },
-  ]);
+  const [messages, setMessages] = useState<
+    { fromUser: string; content: string }[]
+  >([]);
   const [message, setMessage] = useState("");
 
   useEffect(() => {
     socket.on("receiveMessageToSpecificUser", (data) => {
-      setMessages((prev) => [...prev, { content: data.message[0] }]);
+      setMessages((prev) => [
+        ...prev,
+        { fromUser: data.fromUser, content: data.message },
+      ]);
     });
     return () => {
       socket.off("receiveMessageToSpecificUser");
@@ -31,7 +37,7 @@ function ChatFriend() {
     if (!message) return;
 
     socket.emit("sendMessageToSpecificUser", id, message);
-    setMessages((prev) => [...prev, { content: message }]);
+    setMessages((prev) => [...prev, { fromUser: username, content: message }]);
 
     setMessage("");
   };
@@ -40,18 +46,23 @@ function ChatFriend() {
     <Card className="h-full flex flex-col bg-neutral-700 text-neutral-200 ">
       <ChatHeader
         name={id ? id.toString() : "UNDEFINED"}
-        type="server"
+        type="friend"
         key={1}
       />
       <CardContent className=" h-[90vh] relative flex flex-col">
         <ScrollArea className=" flex-1 ">
-          <div className="flex flex-col gap-1 ">
+          <ul className="flex flex-col gap-1 ">
             {messages.map((message, index) => (
-              <p className="py-1" key={index}>
-                {message.content}
-              </p>
+              <li className="py-1" key={index}>
+                <div className="space-y-1">
+                  <h4 className="font-medium text-neutral-300">
+                    {message.fromUser}
+                  </h4>
+                  <p className="text-neutral-100">{message.content}</p>
+                </div>
+              </li>
             ))}
-          </div>
+          </ul>
         </ScrollArea>
         <div className="flex relative space-x-5 py-5 items-center ">
           <Input

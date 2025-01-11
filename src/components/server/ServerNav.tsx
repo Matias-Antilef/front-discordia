@@ -15,7 +15,7 @@ function ServerNav() {
       <CardHeader className="items-center h-[10vh]  ">
         <Link
           to={`${PrivateRoutes.DISCORDIA}/${PrivateRoutes.HOME}`}
-          className="h-14 w-14 items-center flex justify-center bg-blue-200 m-4 rounded-full"
+          className="h-14 w-14 font-bold text-black items-center flex justify-center bg-blue-300 m-4 rounded-full"
         >
           ME
         </Link>
@@ -28,7 +28,7 @@ function ServerNav() {
             ))}
         </ScrollArea>
       </CardContent>
-      <CardFooter className="flex  h-[10vh] p-2 items-center justify-center  absolute bottom-0 w-full">
+      <CardFooter className="h-[10vh] p-0 items-center justify-center flex   absolute bottom-0 m-0 w-full">
         <CreateServer />
       </CardFooter>
     </Card>

@@ -1,15 +1,15 @@
 import { Navigate, Route, Routes } from "react-router";
 import { PrivateRoutes } from "@/models/routes";
-import LayoutComponent from "@/components/layout";
 import HomePage from "./home/HomePage";
 import { useEffect } from "react";
 import ChatFriend from "./chat/ChatFriend";
 import ChatServer from "./chat/ChatServer";
 import { socket } from "@/utils/socket";
 import { useUser } from "@/context/hooks/useUser";
+import LayoutComponent from "./chat/layout";
 
 function Discordia() {
-  const { getServers, logout } = useUser();
+  const { getServers } = useUser();
   const serversId = getServers().map((server) => server.name);
 
   useEffect(() => {

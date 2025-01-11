@@ -6,7 +6,10 @@ function ServerItem({ id }: { id: string }) {
   return (
     <Link to={`${PrivateRoutes.DISCORDIA}/${PrivateRoutes.CHAT_SERVER}/${id}`}>
       <Avatar className="h-14 w-14 bg-slate-300  border-none p-[2px] relative my-2 ">
-        <AvatarImage src="/avatar.jpg" className="w-full h-full rounded-full" />
+        <AvatarImage
+          src="/server.jpg"
+          className="w-full object-cover h-full rounded-full"
+        />
         <AvatarFallback> ID </AvatarFallback>
       </Avatar>
     </Link>

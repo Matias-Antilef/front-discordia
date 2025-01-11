@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { useUser } from "@/context/hooks/useUser";
 import { UserPlusIcon } from "lucide-react";
+import { DialogDescription } from "@radix-ui/react-dialog";
 
 export function AddFriend() {
   const { addFriend, getFriends } = useUser();
@@ -22,8 +23,7 @@ export function AddFriend() {
     if (!name) return alert("El username es requerido");
 
     if (friends.map((friend) => friend.username).includes(name)) {
-      alert("Ya tienes a este usuario en tu lista");
-      return;
+      return alert("Ya tienes a este usuario en tu lista");
     }
 
     addFriend({ username: name });
@@ -34,28 +34,23 @@ export function AddFriend() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <UserPlusIcon className="hover:bg-neutral-600 rounded-full transition-colors  p-1 h-12 w-12 hover:cursor-pointer stroke-white " />
+        <UserPlusIcon className="hover:bg-neutral-600 p-1 h-16 w-16 stroke-[.5px] rounded-full transition-colors   hover:cursor-pointer stroke-white " />
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] bg-neutral-900 flex flex-col gap-10  text-neutral-500 border-none">
+      <DialogContent className="sm:max-w-[425px] bg-neutral-700 flex flex-col gap-10  text-neutral-500 border-none">
         <DialogHeader>
           <DialogTitle className="text-white">Agregar amigo</DialogTitle>
         </DialogHeader>
-        <div className="flex flex-col gap-5">
+        <DialogDescription className="flex flex-col gap-5">
           <Input
             id="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className=" border-none bg-neutral-700 py-5 placeholder:text-neutral-300 text-neutral-200"
+            className=" border-none bg-neutral-600 py-5 placeholder:text-neutral-300 text-neutral-200"
             placeholder="Nombre de usuario"
           />
-        </div>
+        </DialogDescription>
         <DialogFooter>
-          <Button
-            type="submit"
-            variant="outline"
-            className=" text-black"
-            onClick={handleSubmit}
-          >
+          <Button type="submit" variant="secondary" onClick={handleSubmit}>
             Agregar
           </Button>
         </DialogFooter>

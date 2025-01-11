@@ -1,5 +1,5 @@
 import { useUser } from "@/context/hooks/useUser";
-import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
+import { Card, CardContent, CardFooter } from "../ui/card";
 import { ScrollArea } from "../ui/scroll-area";
 import FriendItem from "./FriendItem";
 import { AddFriend } from "./add-friend";
@@ -9,8 +9,7 @@ function PrimaryNav() {
   const { getFriends, logout } = useUser();
   const friends = getFriends();
   return (
-    <Card className="bg-neutral-900 h-full w-80 relative">
-      <CardHeader></CardHeader>
+    <Card className="bg-neutral-900 h-full w-72 relative">
       <CardContent className="h-[90vh] p-1">
         <ScrollArea className="flex flex-col  h-full">
           {friends &&
@@ -19,9 +18,13 @@ function PrimaryNav() {
             ))}
         </ScrollArea>
       </CardContent>
-      <CardFooter className="flex items-center justify-between bottom-0 absolute w-full h-[10vh]  m-0">
+      <CardFooter className="flex items-center  h-[10vh] justify-around bottom-0 absolute w-full p-0  m-0">
         <AddFriend />
-        <Button onClick={() => logout()} variant={"destructive"}>
+        <Button
+          onClick={() => logout()}
+          className="font-semibold"
+          variant={"destructive"}
+        >
           Logout
         </Button>
       </CardFooter>
