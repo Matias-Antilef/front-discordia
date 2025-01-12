@@ -1,12 +1,10 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-function ChatHeader({
-  name,
-  type,
-}: {
+interface ChatHeaderProps {
   name: string;
   type: "server" | "friend";
-}) {
+}
+function ChatHeader({ name, type }: ChatHeaderProps) {
   return (
     <div className="flex items-center gap-5 px-5 py-3 relative border-b-2 border-neutral-800">
       <Avatar className="h-12 w-12 relative overflow-visible">

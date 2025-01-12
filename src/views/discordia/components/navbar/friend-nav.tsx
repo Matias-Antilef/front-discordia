@@ -1,11 +1,11 @@
 import { useUser } from "@/context/hooks/useUser";
-import { Card, CardContent, CardFooter } from "../ui/card";
-import { ScrollArea } from "../ui/scroll-area";
-import FriendItem from "./FriendItem";
+import { Card, CardContent, CardFooter } from "../../../../components/ui/card";
+import { ScrollArea } from "../../../../components/ui/scroll-area";
+import FriendItem from "./friend-item";
 import { AddFriend } from "./add-friend";
-import { Button } from "../ui/button";
+import { Button } from "../../../../components/ui/button";
 
-function PrimaryNav() {
+function FriendNav() {
   const { getFriends, logout } = useUser();
   const friends = getFriends();
   return (
@@ -31,4 +31,4 @@ function PrimaryNav() {
     </Card>
   );
 }
-export default PrimaryNav;
+export default FriendNav;

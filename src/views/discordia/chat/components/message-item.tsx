@@ -1,4 +1,4 @@
-import { MessagesModel } from "../models/message";
+import { MessagesModel } from "../model";
 
 function MessageItem({
   index,

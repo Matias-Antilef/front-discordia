@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { socket } from "../socket";
-import { MessagesModel } from "@/views/discordia/chat/models/message";
+import { socket } from "./socket";
+import { MessagesModel } from "@/views/discordia/chat/model";
 
 interface UseSocketParams {
   id: string | undefined;

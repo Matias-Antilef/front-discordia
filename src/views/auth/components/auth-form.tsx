@@ -9,6 +9,15 @@ import {
 } from "@/components/ui/card";
 import { Link } from "react-router";
 
+interface AuthFormProps {
+  children: React.ReactNode;
+  onSubmit: React.FormEventHandler<HTMLFormElement>;
+  title: string;
+  href: string;
+  footerMsg: string;
+  footerMsgLink: string;
+}
+
 function AuthForm({
   children,
   onSubmit,
@@ -16,14 +25,7 @@ function AuthForm({
   href,
   footerMsg,
   footerMsgLink,
-}: {
-  children: React.ReactNode;
-  onSubmit: React.FormEventHandler<HTMLFormElement>;
-  title: string;
-  href: string;
-  footerMsg: string;
-  footerMsgLink: string;
-}) {
+}: AuthFormProps) {
   return (
     <div className="w-screen h-screen flex justify-center items-center">
       <Card className="w-[30vw] min-w-[500px]">

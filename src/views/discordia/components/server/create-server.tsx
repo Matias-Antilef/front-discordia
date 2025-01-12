@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { useUser } from "@/context/hooks/useUser";
 import { PlusCircle } from "lucide-react";
-import { socket } from "@/utils/socket";
+import { socket } from "@/utils/socket/socket";
 
 export function CreateServer() {
   const { createServer, getServers } = useUser();

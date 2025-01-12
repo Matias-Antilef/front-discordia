@@ -1,11 +1,11 @@
-import PrimaryNav from "@/components/navbar/PrimaryNav";
-import ServerNav from "@/components/server/ServerNav";
+import FriendNav from "../components/navbar/friend-nav";
+import ServerNav from "../components/server/server-nav";
 
 function LayoutComponent({ children }: { children: React.ReactNode }) {
   return (
     <div className="h-screen w-screen  overflow-hidden flex">
       <ServerNav />
-      <PrimaryNav />
+      <FriendNav />
       <div className="flex-1 h-screen ">{children}</div>
     </div>
   );

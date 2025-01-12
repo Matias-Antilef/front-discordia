@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { MessagesModel } from "../models/message";
+import { MessagesModel } from "../model";
 
 export default function AutoScroll({
   messages,

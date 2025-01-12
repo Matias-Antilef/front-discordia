@@ -2,7 +2,7 @@ import { Navigate, Route, Routes } from "react-router";
 import { PrivateRoutes } from "@/models/routes";
 import HomePage from "./home/HomePage";
 import { useEffect } from "react";
-import { socket } from "@/utils/socket";
+import { socket } from "@/utils/socket/socket";
 import { useUser } from "@/context/hooks/useUser";
 import LayoutComponent from "./chat/layout";
 import ChatMain from "./chat/ChatMain";

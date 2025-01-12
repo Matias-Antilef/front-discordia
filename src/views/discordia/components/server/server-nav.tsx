@@ -1,7 +1,12 @@
 import { useUser } from "@/context/hooks/useUser";
-import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
-import { ScrollArea } from "../ui/scroll-area";
-import ServerItem from "./ServerItem";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "../../../../components/ui/card";
+import { ScrollArea } from "../../../../components/ui/scroll-area";
+import ServerItem from "./server-item";
 import { ServerModel } from "@/models/user.model";
 import { Link } from "react-router";
 import { PrivateRoutes } from "@/models/routes";

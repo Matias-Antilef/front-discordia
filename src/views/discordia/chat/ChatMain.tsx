@@ -1,27 +1,41 @@
 import ChatHeader from "@/views/discordia/chat/components/chat-header";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import { socket } from "@/utils/socket";
+import { useNavigate, useParams } from "react-router";
+import { socket } from "@/utils/socket/socket";
 import { useUser } from "@/context/hooks/useUser";
-import { MessagesModel } from "./models/message";
+import { MessagesModel } from "./model";
 import AutoScroll from "./utils/auto-scroll";
 import MessageItem from "./components/message-item";
 import useSocket from "@/utils/socket/useSocket";
+import ChatFooter from "./components/chat-footer";
+import { PrivateRoutes } from "@/models/routes";
 
 function ChatMain({ type }: { type: "friend" | "server" }) {
   const { id } = useParams();
-  const { getUser } = useUser();
+  const { getUser, getFriends, getServers } = useUser();
   const username = getUser().username;
+  const friends = getFriends();
+  const servers = getServers();
+  const navigate = useNavigate();
 
   const [messages, setMessages] = useState<MessagesModel[]>([]);
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    setMessages([]);
+    if (type === "friend" && id) {
+      const friendExists = friends.filter((friend) => friend.username === id);
+      if (friendExists.length === 0)
+        navigate(`${PrivateRoutes.DISCORDIA}/${PrivateRoutes.HOME}`);
+    }
+    if (type === "server" && id) {
+      const serverExists = servers.filter((server) => server.name === id);
+      if (serverExists.length === 0)
+        navigate(`${PrivateRoutes.DISCORDIA}/${PrivateRoutes.HOME}`);
+    }
+
+    return setMessages([]);
   }, [id]);
 
   if (type === "server") {
@@ -34,8 +48,17 @@ function ChatMain({ type }: { type: "friend" | "server" }) {
   const handleNewMessage = (e: React.FormEvent) => {
     e.preventDefault();
     if (!message) return;
-    socket.emit("sendMessageToSpecificUser", id, message);
-    setMessages((prev) => [...prev, { fromUser: username, content: message }]);
+
+    if (type === "friend") {
+      socket.emit("sendMessageToSpecificUser", id, message);
+      setMessages((prev) => [
+        ...prev,
+        { fromUser: username, content: message },
+      ]);
+    }
+    if (type === "server") {
+      socket.emit("sendMessageToChannel", id, message);
+    }
     setMessage("");
   };
 
@@ -56,17 +79,11 @@ function ChatMain({ type }: { type: "friend" | "server" }) {
           </ul>
         </ScrollArea>
         <div className="flex relative space-x-5 py-5 items-center ">
-          <Input
-            onKeyDown={(e) => e.key === "Enter" && handleNewMessage(e)}
-            type="text"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            className="text-white border-none bg-neutral-600 placeholder:text-neutral-400"
-            placeholder="Enviar mensaje"
+          <ChatFooter
+            message={message}
+            setMessage={setMessage}
+            handleNewMessage={handleNewMessage}
           />
-          <Button onClick={handleNewMessage} className="w-32">
-            Send
-          </Button>
         </div>
       </CardContent>
     </Card>
