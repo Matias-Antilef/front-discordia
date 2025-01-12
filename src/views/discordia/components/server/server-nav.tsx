@@ -4,8 +4,8 @@ import {
   CardContent,
   CardFooter,
   CardHeader,
-} from "../../../../components/ui/card";
-import { ScrollArea } from "../../../../components/ui/scroll-area";
+} from "@/components/ui/card";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import ServerItem from "./server-item";
 import { ServerModel } from "@/models/user.model";
 import { Link } from "react-router";

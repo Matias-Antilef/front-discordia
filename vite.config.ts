@@ -15,6 +15,6 @@ export default defineConfig({
       cert: "./nginx.crt",
     },
     host: "localhost",
-    port: 5173, // Opcional
+    port: 5173,
   },
 });

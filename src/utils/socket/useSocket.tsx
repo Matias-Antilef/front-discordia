@@ -24,17 +24,3 @@ export default function useSocket({ id, setMessages, event }: UseSocketParams) {
     };
   }, [id, event, setMessages]);
 }
-
-// useEffect(() => {
-//   socket.on("channelMessage", (data) => {
-//     setMessages((prev) => [
-//       ...prev,
-//       { fromUser: data.fromUser, content: data.message },
-//     ]);
-//   });
-
-//   return () => {
-//     socket.off("channelMessage");
-//     setMessages([]);
-//   };
-// }, [id]);
