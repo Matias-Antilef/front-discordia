@@ -3,9 +3,9 @@ import { PrivateRoutes, PublicRoutes } from "./models/routes";
 import RegisterPage from "./views/auth/RegisterPage";
 import LoginPage from "./views/auth/LoginPage";
 import AuthGuard from "./utils/AuthGuard";
-import PageNotFound from "./utils/PageNotFound";
+import PageNotFound from "./utils/page-not-found";
 import { lazy, Suspense } from "react";
-import SuspenseFallback from "./utils/SuspenseFallback";
+import SuspenseFallback from "./utils/suspense-fallback";
 
 function App() {
   const Discordia = lazy(() => import("./views/discordia/Discordia"));

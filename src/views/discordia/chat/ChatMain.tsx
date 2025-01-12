@@ -73,7 +73,7 @@ function ChatMain({ type }: { type: "friend" | "server" }) {
         <ScrollArea className=" flex-1 ">
           <ul className="flex flex-col gap-1 ">
             {messages.map((message, index) => (
-              <MessageItem index={index} message={message} />
+              <MessageItem key={index} message={message} />
             ))}
             <AutoScroll messages={messages} />
           </ul>
