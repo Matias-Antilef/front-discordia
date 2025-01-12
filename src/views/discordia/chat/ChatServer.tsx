@@ -1,32 +1,23 @@
-import ChatHeader from "@/views/discordia/chat/components/ChatHeader";
+import ChatHeader from "@/views/discordia/chat/components/chat-header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router";
 import { socket } from "@/utils/socket";
+import AutoScroll from "./utils/auto-scroll";
+import { MessagesModel } from "./models/message";
+import MessageItem from "./components/message-item";
+import useSocket from "@/utils/socket/useSocket";
 
 function ChatServer() {
   const { id } = useParams();
 
-  const [messages, setMessages] = useState<
-    { fromUser: string; content: string }[]
-  >([]);
+  const [messages, setMessages] = useState<MessagesModel[]>([]);
   const [message, setMessage] = useState("");
 
-  useEffect(() => {
-    socket.on("channelMessage", (data) => {
-      setMessages((prev) => {
-        return [...prev, { fromUser: data.fromUser, content: data.message }];
-      });
-    });
-
-    return () => {
-      socket.off("channelMessage");
-      setMessages([]);
-    };
-  }, [id]);
+  useSocket({ id, setMessages, event: "channelMessage" });
 
   const handleNewMessage = (e: React.FormEvent) => {
     e.preventDefault();
@@ -46,15 +37,9 @@ function ChatServer() {
         <ScrollArea className=" flex-1 ">
           <ul className="flex flex-col gap-1 ">
             {messages.map((message, index) => (
-              <li className="py-1" key={index}>
-                <div className="space-x-0">
-                  <h4 className="font-semibold text-orange-400 my-1">
-                    {message.fromUser}
-                  </h4>
-                  <p className="text-neutral-100">{message.content}</p>
-                </div>
-              </li>
+              <MessageItem index={index} message={message} />
             ))}
+            <AutoScroll messages={messages} />
           </ul>
         </ScrollArea>
         <div className="flex relative space-x-5 py-5 items-center ">

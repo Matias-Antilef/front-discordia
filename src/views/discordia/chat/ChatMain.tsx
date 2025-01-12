@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { socket } from "@/utils/socket";
 import { useUser } from "@/context/hooks/useUser";
@@ -12,7 +12,7 @@ import AutoScroll from "./utils/auto-scroll";
 import MessageItem from "./components/message-item";
 import useSocket from "@/utils/socket/useSocket";
 
-function ChatFriend() {
+function ChatMain({ type }: { type: "friend" | "server" }) {
   const { id } = useParams();
   const { getUser } = useUser();
   const username = getUser().username;
@@ -20,7 +20,16 @@ function ChatFriend() {
   const [messages, setMessages] = useState<MessagesModel[]>([]);
   const [message, setMessage] = useState("");
 
-  useSocket({ id, setMessages, event: "receiveMessageToSpecificUser" });
+  useEffect(() => {
+    setMessages([]);
+  }, [id]);
+
+  if (type === "server") {
+    useSocket({ id, setMessages, event: "channelMessage" });
+  }
+  if (type === "friend") {
+    useSocket({ id, setMessages, event: "receiveMessageToSpecificUser" });
+  }
 
   const handleNewMessage = (e: React.FormEvent) => {
     e.preventDefault();
@@ -63,4 +72,4 @@ function ChatFriend() {
     </Card>
   );
 }
-export default ChatFriend;
+export default ChatMain;

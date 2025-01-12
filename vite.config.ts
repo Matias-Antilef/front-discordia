@@ -9,4 +9,12 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  server: {
+    https: {
+      key: "./nginx.key",
+      cert: "./nginx.crt",
+    },
+    host: "localhost",
+    port: 5173, // Opcional
+  },
 });

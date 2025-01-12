@@ -2,11 +2,10 @@ import { Navigate, Route, Routes } from "react-router";
 import { PrivateRoutes } from "@/models/routes";
 import HomePage from "./home/HomePage";
 import { useEffect } from "react";
-import ChatFriend from "./chat/ChatFriend";
-import ChatServer from "./chat/ChatServer";
 import { socket } from "@/utils/socket";
 import { useUser } from "@/context/hooks/useUser";
 import LayoutComponent from "./chat/layout";
+import ChatMain from "./chat/ChatMain";
 
 function Discordia() {
   const { getServers } = useUser();
@@ -37,11 +36,11 @@ function Discordia() {
           <Route path={PrivateRoutes.HOME} element={<HomePage />} />
           <Route
             path={`${PrivateRoutes.CHAT_FRIEND}/:id`}
-            element={<ChatFriend />}
+            element={<ChatMain type="friend" />}
           />
           <Route
             path={`${PrivateRoutes.CHAT_SERVER}/:id`}
-            element={<ChatServer />}
+            element={<ChatMain type="server" />}
           />
         </Routes>
       </LayoutComponent>
