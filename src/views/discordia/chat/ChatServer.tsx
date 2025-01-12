@@ -17,10 +17,9 @@ function ChatServer() {
 
   useEffect(() => {
     socket.on("channelMessage", (data) => {
-      setMessages((prev) => [
-        ...prev,
-        { fromUser: data.fromUser, content: data.message },
-      ]);
+      setMessages((prev) => {
+        return [...prev, { fromUser: data.fromUser, content: data.message }];
+      });
     });
 
     return () => {
@@ -48,8 +47,8 @@ function ChatServer() {
           <ul className="flex flex-col gap-1 ">
             {messages.map((message, index) => (
               <li className="py-1" key={index}>
-                <div className="space-y-1">
-                  <h4 className="font-medium text-neutral-300">
+                <div className="space-x-0">
+                  <h4 className="font-semibold text-orange-400 my-1">
                     {message.fromUser}
                   </h4>
                   <p className="text-neutral-100">{message.content}</p>
