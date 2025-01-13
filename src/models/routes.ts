@@ -3,9 +3,8 @@ export enum PublicRoutes {
   REGISTER = "/register",
 }
 export enum PrivateRoutes {
-  DISCORDIA = "/discordia",
+  SHIBICHAT = "/shibi_chat",
   HOME = "home",
   CHAT_SERVER = "chat_server",
   CHAT_FRIEND = "chat_friend",
-  SERVER = "server",
 }

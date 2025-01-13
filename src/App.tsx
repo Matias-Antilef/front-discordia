@@ -8,7 +8,7 @@ import { lazy, Suspense } from "react";
 import SuspenseFallback from "./utils/suspense-fallback";
 
 function App() {
-  const Discordia = lazy(() => import("./views/discordia/Discordia"));
+  const ShibiChat = lazy(() => import("./views/shibichat/ShibiChat"));
 
   return (
     <Suspense fallback={<SuspenseFallback />}>
@@ -19,8 +19,8 @@ function App() {
         <Route path={PublicRoutes.REGISTER} element={<RegisterPage />} />
         <Route element={<AuthGuard />}>
           <Route
-            path={`${PrivateRoutes.DISCORDIA}/*`}
-            element={<Discordia />}
+            path={`${PrivateRoutes.SHIBICHAT}/*`}
+            element={<ShibiChat />}
           />
         </Route>
       </Routes>

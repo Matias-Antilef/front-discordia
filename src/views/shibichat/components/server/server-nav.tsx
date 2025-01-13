@@ -19,7 +19,7 @@ function ServerNav() {
     <Card className="h-full flex flex-col w-20 relative bg-neutral-800 ">
       <CardHeader className="items-center h-[10vh]  ">
         <Link
-          to={`${PrivateRoutes.DISCORDIA}/${PrivateRoutes.HOME}`}
+          to={`${PrivateRoutes.SHIBICHAT}/${PrivateRoutes.HOME}`}
           className="h-14 w-14 font-bold text-black items-center flex justify-center bg-blue-300 m-4 rounded-full"
         >
           ME

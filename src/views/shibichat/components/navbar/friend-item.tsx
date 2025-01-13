@@ -8,7 +8,7 @@ function FriendItem({ id }: { id: string }) {
   const { removeFriend } = useUser();
   return (
     <Link
-      to={`${PrivateRoutes.DISCORDIA}/${PrivateRoutes.CHAT_FRIEND}/${id}`}
+      to={`${PrivateRoutes.SHIBICHAT}/${PrivateRoutes.CHAT_FRIEND}/${id}`}
       className="flex hover:cursor-pointer items-center mb-1  h-16 gap-2 bg-neutral-700 group hover:bg-neutral-600 rounded-lg px-1"
     >
       <AvatarCustom id="1" status="online" />

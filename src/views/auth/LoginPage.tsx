@@ -29,7 +29,7 @@ function LoginPage() {
         friends: [],
         servers: [],
       });
-      navigate(PrivateRoutes.DISCORDIA);
+      navigate(PrivateRoutes.SHIBICHAT);
     }
   };
 

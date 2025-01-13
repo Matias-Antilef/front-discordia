@@ -1,4 +1,4 @@
-import ChatHeader from "@/views/discordia/chat/components/chat-header";
+import ChatHeader from "@/views/shibichat/chat/components/chat-header";
 import { Card, CardContent } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useEffect, useState } from "react";
@@ -27,12 +27,12 @@ function ChatMain({ type }: { type: "friend" | "server" }) {
     if (type === "friend" && id) {
       const friendExists = friends.filter((friend) => friend.username === id);
       if (friendExists.length === 0)
-        navigate(`${PrivateRoutes.DISCORDIA}/${PrivateRoutes.HOME}`);
+        navigate(`${PrivateRoutes.SHIBICHAT}/${PrivateRoutes.HOME}`);
     }
     if (type === "server" && id) {
       const serverExists = servers.filter((server) => server.name === id);
       if (serverExists.length === 0)
-        navigate(`${PrivateRoutes.DISCORDIA}/${PrivateRoutes.HOME}`);
+        navigate(`${PrivateRoutes.SHIBICHAT}/${PrivateRoutes.HOME}`);
     }
 
     return setMessages([]);

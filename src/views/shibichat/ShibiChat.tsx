@@ -7,7 +7,7 @@ import { useUser } from "@/context/hooks/useUser";
 import LayoutComponent from "./chat/layout";
 import ChatMain from "./chat/ChatMain";
 
-function Discordia() {
+function ShibiChat() {
   const { getServers } = useUser();
   const serversId = getServers().map((server) => server.name);
 
@@ -47,4 +47,4 @@ function Discordia() {
     </>
   );
 }
-export default Discordia;
+export default ShibiChat;
