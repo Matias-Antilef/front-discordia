@@ -4,6 +4,14 @@
 
 /* ... */
 
+@layer utilities {
+  .truncate-chars {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

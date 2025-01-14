@@ -14,7 +14,7 @@ import { useUser } from "@/context/hooks/useUser";
 import { PlusCircle } from "lucide-react";
 import { socket } from "@/utils/socket/socket";
 
-export function CreateServer() {
+function ServerCreate() {
   const { createServer, getServers } = useUser();
   const servers = getServers();
   const [name, setName] = useState("");
@@ -40,7 +40,7 @@ export function CreateServer() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <PlusCircle className=" hover:bg-neutral-600 rounded-full p-1 h-16 w-16 stroke-[.5px] hover:cursor-pointer stroke-white " />
+        <PlusCircle className="rounded-full p-2 hover:p-1 transition-all h-16 w-16 stroke-[1px] hover:cursor-pointer stroke-white" />
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] bg-neutral-700 flex flex-col gap-10 border-none">
         <DialogHeader>
@@ -71,3 +71,4 @@ export function CreateServer() {
     </Dialog>
   );
 }
+export default ServerCreate;

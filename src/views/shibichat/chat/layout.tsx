@@ -1,5 +1,5 @@
-import FriendNav from "../components/navbar/friend-nav";
-import ServerNav from "../components/server/server-nav";
+import FriendNav from "../components/friend-nav/friend-nav";
+import ServerNav from "../components/server-nav/server-nav";
 
 function LayoutComponent({ children }: { children: React.ReactNode }) {
   return (

@@ -13,7 +13,7 @@ import { useUser } from "@/context/hooks/useUser";
 import { UserPlusIcon } from "lucide-react";
 import { DialogDescription } from "@radix-ui/react-dialog";
 
-export function AddFriend() {
+function FriendAdd() {
   const { addFriend, getFriends } = useUser();
   const friends = getFriends();
   const [name, setName] = useState("");
@@ -58,3 +58,4 @@ export function AddFriend() {
     </Dialog>
   );
 }
+export default FriendAdd;
