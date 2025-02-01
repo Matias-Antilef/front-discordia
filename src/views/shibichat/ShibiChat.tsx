@@ -13,7 +13,9 @@ function ShibiChat() {
 
   useEffect(() => {
     if (serversId.length > 0) {
-      socket.emit("joinChannel", serversId);
+      serversId.forEach((serverName) => {
+        socket.emit("joinChannel", serverName); // Envía uno por uno
+      });
     }
   }, [serversId]);
 

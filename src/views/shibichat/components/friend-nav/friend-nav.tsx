@@ -18,9 +18,7 @@ function FriendNav() {
         <ScrollArea className="flex flex-col gap-2 h-full">
           {friends &&
             friends.map((friend) => (
-              <>
-                <FriendItem key={friend.username} username={friend.username} />
-              </>
+              <FriendItem key={friend.username} username={friend.username} />
             ))}
         </ScrollArea>
         <Separator className="my-2" />

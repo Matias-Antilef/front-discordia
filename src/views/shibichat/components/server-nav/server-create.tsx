@@ -27,7 +27,7 @@ function ServerCreate() {
     if (servers.map((server) => server.name).includes(name)) {
       return alert("El servidor ya existe");
     }
-
+    console.log(name, description);
     createServer({ name, description });
 
     socket.on("welcomeMessage", (message) => {
